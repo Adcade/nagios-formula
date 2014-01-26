@@ -2,5 +2,10 @@
     'Arch': {
         'pkgs': ['nagios', ],
         'service': 'nagios',
+        },
+    'Debian': {
+        'pkgs': ['nagios3', ],
+        'service': 'nagios3',
     },
+
 }, merge=salt['pillar.get']('nagios:lookup')) %}
