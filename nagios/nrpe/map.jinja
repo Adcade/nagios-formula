@@ -6,5 +6,10 @@
     'Redhat': {
       'pkgs': ['nrpe', 'nagios-plugins-nrpe', ],
       'service': 'nrpe',
+      },
+    'Debian': {
+      'pkgs': ['nagios-nrpe-server', 'nagios-nrpe-plugin', ],
+      'service': 'nagios-nrpe-server',
     },
+
 }, merge=salt['pillar.get']('nrpe:lookup')) %}

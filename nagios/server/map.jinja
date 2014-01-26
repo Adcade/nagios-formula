@@ -6,5 +6,10 @@
     'Redhat': {
       'pkgs': ['nagios', 'nagios-plugins-all', ],
       'service': 'nagios',
+      },
+    'Debian': {
+      'pkgs': ['nagios3', 'nagios-plugins', ],
+      'service': 'nagios3',
     },
+
 }, merge=salt['pillar.get']('nagios:lookup')) %}
