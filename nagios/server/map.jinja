@@ -2,14 +2,29 @@
     'Arch': {
         'pkgs': ['nagios', 'nagios-plugins', ],
         'service': 'nagios',
+        'pkg_name': 'nagios',
+        'user_name': 'nagios',
+        'home_path': '/usr/share/nagios',
+        'uid': '30',
+        'gid': '30'
     },
     'Redhat': {
       'pkgs': ['nagios', 'nagios-plugins-all', ],
       'service': 'nagios',
-      },
+      'pkg_name': 'nagios',
+      'user_name': 'nagios',
+      'home_path': '/usr/share/nagios',
+      'uid': '30', 
+      'gid': '30',
+    },
     'Debian': {
       'pkgs': ['nagios3', 'nagios-plugins', ],
       'service': 'nagios3',
+      'pkg_name': 'nagios3',
+      'user_name': 'nagios',
+      'home_path': '/var/lib/nagios',
+      'uid': '300',
+      'gid': '300',
     },
 
 }, merge=salt['pillar.get']('nagios:lookup')) %}

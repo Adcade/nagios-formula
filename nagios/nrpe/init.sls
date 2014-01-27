@@ -1,6 +1,6 @@
 {% from "nagios/nrpe/map.jinja" import map with context %}
 
-nrpe:
+{{ map.pkg_name }}:
   pkg:
     - installed
     - pkgs: {{ map.pkgs|json }}
@@ -8,25 +8,29 @@ nrpe:
     - running
     - name: {{ map.service }}
     - enable: true
+{% if not grains['os_family'] == 'Debian' %}
   group:
     - present
-    - gid: 31
+    - name: {{ map.user_name }}
+    - gid: {{ map.gid }}
     - system: true
   user:
     - present
+    - name: {{ map.user_name }}
     - shell: /bin/false
-    - home: /usr/share/nagios
-    - uid: 31
-    - guid: 31
+    - home: {{ map.user_home }}
+    - uid: {{ map.uid }}
+    - guid: {{ map.gid }}
     - groups:
-      - nrpe
+      - {{ map.user_name }}
+{% endif %}
 
-/etc/nrpe:
+/etc/{{ map.pkg_name }}:
   file:
     - recurse
     - source: salt://nagios/nrpe/files
     - template: jinja
     - watch_in:
       - service: {{ map.service }}
-    - user: nrpe
-    - group: nrpe
+    - user: {{ map.user_name }}
+    - group: {{ map.user_name }}
